@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login and Registration Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <!-- External Fonts and Material Icons -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('mario.gif');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 400px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding-left: 40px;
+            height: 50px;
+        }
+
+        .form-control-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            transition: all 0.3s ease-in-out;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: -25px;
+        }
+
+        .btn-primary {
+            border-radius: 25px;
+            height: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .forgot-password-link,
+        .already-have-account-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* New window panel effect */
+        #register-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<!-- Container -->
+<div class="container">
+    <!-- Login Form -->
+    <div class="text-center mb-4">
+        <img src="logo.gif" alt="Logo" class="logo" width="100">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <form id="login-form" action="Dashboard.html" method="post">
+                <!-- Username Input -->
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" required>
+                    <label class="form-control-placeholder"><i class="material-icons input-icon">person_outline</i>Username</label>
+                </div>
+                <!-- Password Input -->
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" required>
+                    <label class="form-control-placeholder"><i class="material-icons input-icon">lock</i>Password</label>
+                </div>
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <!-- Forgot Password Link -->
+                <div class="text-center mt-3">
+                    <a href="#" class="forgot-password-link">Forgot your password?</a>
+                </div>
+                <!-- Show Registration Form Button -->
+                <div class="text-center mt-3">
+                    <button id="show-register-form-btn" class="btn btn-link">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Registration Form -->
+<div id="register-form">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h3>Register</h3>
+        </div>
+        <form action="register.php" method="post">
+            <!-- Username Input -->
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" required>
+                <label class="form-control-placeholder"><i class="material-icons input-icon">person_outline</i>Username</label>
+            </div>
+            <!-- Email Input -->
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" required>
+                <label class="form-control-placeholder"><i class="material-icons input-icon">mail_outline</i>E-Mail</label>
+            </div>
+            <!-- Password Input -->
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" required>
+                <label class="form-control-placeholder"><i class="material-icons input-icon">lock</i>Password</label>
+            </div>
+            <!-- Confirm Password Input -->
+            <div class="form-group">
+                <input type="password" name="confirm_password" class="form-control" required>
+                <label class="form-control-placeholder"><i class="material-icons input-icon">lock</i>Confirm Password</label>
+            </div>
+            <!-- Register Button -->
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <!-- Already Have an Account Link -->
+            <div class="text-center mt-3">
+                <button id="show-login-form-btn" class="btn btn-link">Already have an account? Sign in.</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- #Container End -->
+
+<script>
+    // JavaScript to toggle the visibility of the registration form
+    document.getElementById('show-register-form-btn').addEventListener('click', function () {
+        document.getElementById('register-form').style.display = 'block';
+    });
+
+    // JavaScript to toggle the visibility of the login form
+    document.getElementById('show-login-form-btn').addEventListener('click', function () {
+        document.getElementById('register-form').style.display = 'none';
+    });
+
+    // JavaScript to move the label up when typing
+    document.querySelectorAll('.form-control').forEach(function(input) {
+        input.addEventListener('input', function() {
+            var label = this.parentElement.querySelector('.form-control-placeholder');
+            if (this.value !== '') {
+                label.style.top = '10px';
+                label.style.opacity = '1';
+            } else {
+                label.style.top = '50%';
+                label.style.opacity = '0.5';
+            }
+        });
+    });
+</script>
+</body>
+</html>
